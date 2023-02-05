@@ -11,6 +11,112 @@
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+
+        <!-- версия JUnit4 -->
+        <junit.version>4.13.2</junit.version>
+
+        <!-- версия Selenium -->
+        <selenium.version>4.8.0</selenium.version>
+
+        <!-- версия Selenide -->
+        <selenide.version>6.11.1</selenide.version>
+
+        <!-- версия Allure -->
+        <allure.version>2.20.0</allure.version>
+
+        <!-- версия allure-maven -->
+        <allure-maven.version>2.10.0</allure-maven.version>
+
+        <!-- версия maven-surefire-plugin -->
+        <maven-plugin.version>2.22.2</maven-plugin.version>
+
+        <!-- версия Aspectj -->
+        <aspectj.version>1.8.10</aspectj.version>
     </properties>
+
+    <dependencies>
+        <!-- JUnit4 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>${junit.version</scope>
+        </dependency>
+
+        <!-- Selenium -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+
+        <!-- Selenide -->
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>${selenide.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- модуль взаимодействия Allure и Junit -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit4</artifactId>
+            <version>${allure.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- настройка плагина maven-surefire-plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-plugin.version}</version>
+
+                <configuration>
+                    <testFailureIgnore>false</testFailureIgnore>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
+
+                    <properties>
+                        <property>
+                            <name>listener</name>
+                            <value>io.qameta.allure.junit4.AllureJunit4</value>
+                        </property>
+                    </properties>
+
+                    <systemProperties>
+                        <!-- папка, в которую будут генерироваться отчёты Allure -->
+                        <property>
+                            <name>allure.results.directory</name>
+                            <value>${project.build.directory}/allure-results</value>
+                        </property>
+                    </systemProperties>
+                </configuration>
+
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <!-- подключение плагина allure-maven для вызова функций Allure с помощью Maven -->
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>${allure-maven.version}</version>
+
+                <configuration>
+                    <reportVersion>2.15.0</reportVersion>
+                </configuration>
+
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
