@@ -19,6 +19,7 @@ target/
 
 # User-specific stuff
 .idea/
+.build/
 
 # IntelliJ
 out/
