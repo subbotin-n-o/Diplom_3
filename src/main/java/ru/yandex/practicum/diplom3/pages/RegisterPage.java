@@ -19,6 +19,7 @@ public class RegisterPage {
     public static final String REGISTER = "Зарегистрироваться";
     public static final String LOGIN = "Войти";
     public static final String ERROR_MESSAGE = ".input__error";
+    public static final String REGISTER_HEADER = ".Auth_login__3hAey > h2:nth-child(1)";
 
     public static final String NAME = getRandomName();
     public static final String EMAIL = getRandomEmail();
@@ -42,6 +43,9 @@ public class RegisterPage {
 
     @FindBy(how = How.CSS, using = ERROR_MESSAGE)
     private SelenideElement errorMessage;
+
+    @FindBy(how = How.CSS, using = REGISTER_HEADER)
+    private SelenideElement registerHeader;
 
     public LoginPage validLogin() {
         setFieldName(NAME);
@@ -89,7 +93,7 @@ public class RegisterPage {
     }
 
     public void waitForRegisterPage() {
-        $(byText("Регистрация")).should(visible);
+        registerHeader.should(visible);
     }
 
     private void waitForErrorMessage() {
