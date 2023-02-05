@@ -9,16 +9,21 @@ import static com.codeborne.selenide.Condition.*;
 
 public class LoginPage {
 
-    @FindBy(how = How.LINK_TEXT, using = "Зарегистрироваться")
+    public static final String REGISTER = "Зарегистрироваться";
+    public static final String RESTORE_PASSWORD = "Восстановить пароль";
+    public static final String LOGIN_HEADER = ".Auth_login__3hAey > h2";
+
+    @FindBy(how = How.LINK_TEXT, using = REGISTER)
     private SelenideElement registerButton;
 
-    @FindBy(how = How.LINK_TEXT, using = "Восстановить пароль")
+    @FindBy(how = How.LINK_TEXT, using = RESTORE_PASSWORD)
     private SelenideElement restorePasswordButton;
 
-    @FindBy(how = How.CSS, using = ".Auth_login__3hAey > h2")
+
+    @FindBy(how = How.CSS, using = LOGIN_HEADER)
     private SelenideElement loginHeader;
 
-    public RegisterPage clickRegisterButton() {
+    public RegisterPage openRegisterPage() {
         registerButton.click();
 
         RegisterPage registerPage = page(RegisterPage.class);
@@ -38,7 +43,8 @@ public class LoginPage {
         return loginHeader.getText();
     }
 
-    public void waitForLoginPage(){
+    public void waitForLoginPage() {
         loginHeader.should(visible);
     }
+
 }

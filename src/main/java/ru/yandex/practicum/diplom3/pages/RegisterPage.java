@@ -11,20 +11,30 @@ import static com.codeborne.selenide.Selenide.page;
 
 public class RegisterPage {
 
-    @FindBy(how = How.XPATH, using = ".//form/fieldset[1]/div/div/input")
+    public static final String FIELD_NAME = ".//form/fieldset[1]/div/div/input";
+    public static final String FIELD_EMAIL = ".//form/fieldset[2]/div/div/input";
+    public static final String PASSWORD = "Пароль";
+    public static final String REGISTER = "Зарегистрироваться";
+    public static final String LOGIN = "Войти";
+    public static final String ERROR_MESSAGE = ".input__error";
+
+    @FindBy(how = How.XPATH, using = FIELD_NAME)
     private SelenideElement fieldName;
 
-    @FindBy(how = How.XPATH, using = ".//form/fieldset[2]/div/div/input")
+    @FindBy(how = How.XPATH, using = FIELD_EMAIL)
     private SelenideElement fieldEmail;
 
-    @FindBy(how = How.NAME, using = "Пароль")
+    @FindBy(how = How.NAME, using = PASSWORD)
     private SelenideElement fieldPassword;
 
-    @FindBy(how = How.LINK_TEXT, using = "Зарегистрироваться")
+    @FindBy(how = How.LINK_TEXT, using = REGISTER)
     private SelenideElement registerButton;
 
-    @FindBy(how = How.LINK_TEXT, using = "Войти")
+    @FindBy(how = How.LINK_TEXT, using = LOGIN)
     private SelenideElement loginButton;
+
+    @FindBy(how = How.CSS, using = ERROR_MESSAGE)
+    private SelenideElement errorMessage;
 
     public LoginPage login(String name, String email, String password) {
         setFieldName(name);
@@ -54,7 +64,16 @@ public class RegisterPage {
         loginButton.click();
     }
 
+    public String getTextErrorMessage() {
+        waitForErrorMessage();
+        return errorMessage.getText();
+    }
+
     public void waitForRegisterPage() {
         $(byText("Регистрация")).should(visible);
+    }
+
+    private void waitForErrorMessage() {
+        errorMessage.should(visible);
     }
 }
