@@ -4,18 +4,23 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.page;
 
 public class HomePage {
 
-    public static final String LK_BUTTON = "a.AppHeader_header__link__3D_hX:nth-child(3) > p:nth-child(2)";
-    public static final String SIGN_IN_BUTTON = ".button_button__33qZ0";
+    private static final String LK_BTN = ".//header/nav/a/p";
+    private static final String SIGN_IN_BTN = ".//section[2]/div/button";
+    private static final String HEADER = "active";
 
-    @FindBy(how = How.CSS, using = LK_BUTTON)
+    @FindBy(how = How.XPATH, using = LK_BTN)
     private SelenideElement lkButton;
 
-    @FindBy(how = How.CSS, using = SIGN_IN_BUTTON)
+    @FindBy(how = How.XPATH, using = SIGN_IN_BTN)
     private SelenideElement signInButton;
+
+    @FindBy(how = How.CLASS_NAME, using = HEADER)
+    private SelenideElement header;
 
     public LoginPage openLoginPage(String buttonName) {
         if (buttonName.equals("lkButton")) {
@@ -40,5 +45,9 @@ public class HomePage {
         LoginPage loginPage = page(LoginPage.class);
         loginPage.waitForLoginPage();
         return loginPage;
+    }
+
+    public void waitForHomePage() {
+        header.should(visible);
     }
 }
