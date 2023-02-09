@@ -9,6 +9,10 @@ import static com.codeborne.selenide.Condition.*;
 
 public class LoginPage extends AbstractPage {
 
+//    private HomePage homePage;
+//    private RegisterPage registerPage;
+//    private ForgotPasswordPage forgotPasswordPage;
+
     private static final String LOGIN_BTN = ".button_button__33qZ0";
     private static final String REGISTER_BTN = "Зарегистрироваться";
     private static final String RESTORE_PASSWORD_BTN = "Восстановить пароль";
@@ -34,6 +38,26 @@ public class LoginPage extends AbstractPage {
     @FindBy(how = How.CSS, using = LOGIN_HEADER)
     protected SelenideElement loginHeader;
 
+//    public HomePage signIn(String email, String password) {
+//        setFieldEmail(email);
+//        setFieldPassword(password);
+//        clickLoginButton();
+//
+//        homePage = page(HomePage.class);
+//        homePage.waitForHomePage();
+//        return homePage;
+//    }
+
+//    public HomePage signIn() {
+//        setFieldEmail("boyce.koepp@yahoo.com");
+//        setFieldPassword("fsswhthe");
+//        clickLoginButton();
+//
+//        homePage = page(HomePage.class);
+//        homePage.waitForHomePage();
+//        return homePage;
+//    }
+
     public RegisterPage openRegisterPage() {
         registerButton.click();
 
@@ -48,6 +72,10 @@ public class LoginPage extends AbstractPage {
         forgotPasswordPage = page(ForgotPasswordPage.class);
         forgotPasswordPage.waitForForgotPasswordPage();
         return forgotPasswordPage;
+    }
+
+    protected void clickLoginButton() {
+        loginButton.click();
     }
 
     public String getTextLoginHeader() {

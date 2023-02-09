@@ -12,32 +12,12 @@ public class GenerateUser {
     private final String notValidPassword;
 
     public GenerateUser() {
-        name = getRandomName();
-        email = getRandomEmail();
-        validPassword = getRandomValidPassword();
-        notValidPassword = getRandomNotValidPassword();
-    }
+        Faker faker = new Faker(new Locale("en"));
 
-    private static String getRandomName() {
-        return new Faker(new Locale("en"))
-                .name()
-                .firstName();
-    }
-
-    private static String getRandomEmail() {
-        return new Faker(new Locale("en"))
-                .internet()
-                .emailAddress();
-    }
-
-    private static String getRandomValidPassword() {
-        return new Faker(new Locale("en"))
-                .internet().password(6, 10);
-    }
-
-    private static String getRandomNotValidPassword() {
-        return new Faker(new Locale("en"))
-                .internet().password(4,5);
+        name = faker.name().firstName();
+        email = faker.internet().emailAddress();
+        validPassword = faker.internet().password(6, 10);
+        notValidPassword = faker.internet().password(4,5);
     }
 
     public String getName() {

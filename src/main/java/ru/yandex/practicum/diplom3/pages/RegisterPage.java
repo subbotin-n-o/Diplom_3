@@ -39,19 +39,7 @@ public class RegisterPage extends AbstractPage {
     @FindBy(how = How.CSS, using = REGISTER_HEADER)
     private SelenideElement registerHeader;
 
-    public RegisteredUserLoginPage registrationUserHardCore(String name, String email, String password) {
-        setFieldName(name);
-        setFieldEmail(email);
-        setFieldPassword(password);
-        clickLoginButton();
-
-        registeredUserLoginPage = page(RegisteredUserLoginPage.class);
-        registeredUserLoginPage.waitForLoginPage();
-
-        return registeredUserLoginPage;
-    }
-
-    public RegisteredUserLoginPage registrationUserValidData(GenerateUser user) {
+    public RegisteredUserLoginPage registrationUserValidDataHARD(GenerateUser user) {
         setFieldName(user.getName());
         setFieldEmail(user.getEmail());
         setFieldPassword(user.getValidPassword());
@@ -63,11 +51,26 @@ public class RegisterPage extends AbstractPage {
         return registeredUserLoginPage;
     }
 
-    public RegisterPage registrationUserNotValidData(GenerateUser user) {
-        setFieldName(user.getName());
-        setFieldEmail(user.getEmail());
-        setFieldPassword(user.getNotValidPassword());
+    public RegisteredUserLoginPage registrationUserValidDataHARD(String name, String email, String password) {
+        setFieldName(name);
+        setFieldEmail(email);
+        setFieldPassword(password);
         clickLoginButton();
+
+        registeredUserLoginPage = page(RegisteredUserLoginPage.class);
+        registeredUserLoginPage.waitForRegisteredUserLoginPage();
+
+        return registeredUserLoginPage;
+    }
+
+    public RegisterPage registrationUserNotValidData(String name, String email, String password) {
+        setFieldName(name);
+        setFieldEmail(email);
+        setFieldPassword(password);
+        clickLoginButton();
+
+        loginPage = page(LoginPage.class);
+        loginPage.waitForLoginPage();
 
         return this;
     }

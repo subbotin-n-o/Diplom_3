@@ -1,10 +1,12 @@
 package ru.yandex.practicum.diplom3.pages;
 
+import ru.yandex.practicum.diplom3.GenerateUser;
+
 public class AbstractPage {
-    protected RegisteredUserHomePage registeredUserHomePage;
-    protected LoginPage loginPage;
-    protected RegisteredUserLoginPage registeredUserLoginPage;
-    protected RegisterPage registerPage;
-    protected ProfilePage profilePage;
-    protected ForgotPasswordPage forgotPasswordPage;
+    RegisteredUserHomePage registeredUserHomePage;
+    LoginPage loginPage;
+    RegisteredUserLoginPage registeredUserLoginPage;
+    RegisterPage registerPage;
+    ProfilePage profilePage;
+    ForgotPasswordPage forgotPasswordPage;
 }

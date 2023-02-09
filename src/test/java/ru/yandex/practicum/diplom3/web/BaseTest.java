@@ -10,18 +10,16 @@ import static ru.yandex.practicum.diplom3.web.BrowserType.GOOGLE_CHROME;
 import static ru.yandex.practicum.diplom3.web.BrowserType.YANDEX_BROWSER;
 
 public class BaseTest {
-
-    protected final String BASE_URL = "https://stellarburgers.nomoreparties.site/";
-
-    private static final String CHROME = "chrome";
-    private static final String DRIVER_PATH = "/Users/nikitasubbotin/tools/chromedriver";
-    private static final String YA_BINARY = "/Applications/Yandex.app/Contents/MacOS/Yandex";
-    private static final String FULL_HD_SIZE = "1920x1080";
+    final String BASE_URL = "https://stellarburgers.nomoreparties.site/";
 
     protected GenerateUser user;
 
-    protected static void initBrowser(BrowserType type) throws IOException {
-        System.setProperty("webdriver.chrome.driver", DRIVER_PATH);
+    private static final String CHROME = "chrome";
+    private static final String YA_BINARY = "/Applications/Yandex.app/Contents/MacOS/Yandex";
+    private static final String FULL_HD_SIZE = "1920x1080";
+
+    public static void initBrowser(BrowserType type) throws IOException {
+        System.getProperties().load(ClassLoader.getSystemResourceAsStream("config.properties"));
 
         if (type.equals(GOOGLE_CHROME)) {
             Configuration.browser = CHROME;
@@ -38,9 +36,8 @@ public class BaseTest {
         Configuration.headless = false;
     }
 
-    protected GenerateUser createUser() {
+    protected void createUser() {
         user = new GenerateUser();
-        return user;
     }
 
     protected void browserClose() {

@@ -2,14 +2,14 @@ package ru.yandex.practicum.diplom3.pages;
 
 import ru.yandex.practicum.diplom3.GenerateUser;
 
-import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.page;
 
 public class RegisteredUserLoginPage extends LoginPage {
 
-    public RegisteredUserHomePage signInHardCore(String email, String password) {
-        setFieldEmail(email);
-        setFieldPassword(password);
+    public RegisteredUserHomePage signIn(GenerateUser user) {
+        setFieldEmail(user.getEmail());
+        setFieldPassword(user.getValidPassword());
         clickLoginButton();
 
         registeredUserHomePage = page(RegisteredUserHomePage.class);
@@ -17,9 +17,9 @@ public class RegisteredUserLoginPage extends LoginPage {
         return registeredUserHomePage;
     }
 
-    public RegisteredUserHomePage signIn(GenerateUser user) {
-        setFieldEmail(user.getEmail());
-        setFieldPassword(user.getValidPassword());
+    public RegisteredUserHomePage signInHARD(String email, String password) {
+        setFieldEmail(email);
+        setFieldPassword(password);
         clickLoginButton();
 
         registeredUserHomePage = page(RegisteredUserHomePage.class);
@@ -35,12 +35,9 @@ public class RegisteredUserLoginPage extends LoginPage {
         fieldPassword.setValue(password);
     }
 
-    private void clickLoginButton() {
-        loginButton.shouldBe(enabled).click();
-    }
-
     public void waitForRegisteredUserLoginPage() {
         loginHeader.should(visible);
     }
+
 
 }
