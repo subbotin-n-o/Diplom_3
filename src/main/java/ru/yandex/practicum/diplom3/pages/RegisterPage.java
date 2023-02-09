@@ -39,7 +39,7 @@ public class RegisterPage extends AbstractPage {
     @FindBy(how = How.CSS, using = REGISTER_HEADER)
     private SelenideElement registerHeader;
 
-    public RegisteredUserLoginPage registrationUserValidDataHARD(GenerateUser user) {
+    public RegisteredUserLoginPage registrationUserValidData(GenerateUser user) {
         setFieldName(user.getName());
         setFieldEmail(user.getEmail());
         setFieldPassword(user.getValidPassword());
@@ -51,7 +51,7 @@ public class RegisterPage extends AbstractPage {
         return registeredUserLoginPage;
     }
 
-    public RegisteredUserLoginPage registrationUserValidDataHARD(String name, String email, String password) {
+    public RegisteredUserLoginPage registrationUserValidData(String name, String email, String password) {
         setFieldName(name);
         setFieldEmail(email);
         setFieldPassword(password);

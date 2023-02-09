@@ -17,7 +17,7 @@ public class RegisteredUserLoginPage extends LoginPage {
         return registeredUserHomePage;
     }
 
-    public RegisteredUserHomePage signInHARD(String email, String password) {
+    public RegisteredUserHomePage signIn(String email, String password) {
         setFieldEmail(email);
         setFieldPassword(password);
         clickLoginButton();

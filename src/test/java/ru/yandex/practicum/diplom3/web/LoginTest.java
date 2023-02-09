@@ -27,7 +27,7 @@ public class LoginTest extends BaseTest {
         assertTrue(open(BASE_URL, HomePage.class)
                 .openLoginPage(SIGN_IN_BUTTON)
                 .openRegisterPage()
-                .registrationUserValidDataHARD(user)
+                .registrationUserValidData(user)
                 .signIn(user)
                 .openProfilePage()
                 .isProfilePage());
@@ -39,8 +39,8 @@ public class LoginTest extends BaseTest {
         assertTrue(open(BASE_URL, HomePage.class)
                 .openLoginPage(SIGN_IN_BUTTON)
                 .openRegisterPage()
-                .registrationUserValidDataHARD("katlyn", "katlyn.towne@yahoo.com", "0cxihbc8")
-                .signInHARD("katlyn.towne@yahoo.com", "0cxihbc8")
+                .registrationUserValidData("katlyn", "katlyn.towne@yahoo.com", "0cxihbc8")
+                .signIn("katlyn.towne@yahoo.com", "0cxihbc8")
                 .openProfilePage()
                 .isProfilePage());
     }

@@ -51,7 +51,7 @@ public class RegisterTest extends BaseTest {
         assertEquals(LOGIN, open(BASE_URL, HomePage.class)
                 .openLoginPage(buttonChoice)
                 .openRegisterPage()
-                .registrationUserValidDataHARD(user.getName(), user.getEmail(), user.getValidPassword())
+                .registrationUserValidData(user.getName(), user.getEmail(), user.getValidPassword())
                 .getTextLoginHeader());
     }
 
