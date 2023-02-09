@@ -3,6 +3,7 @@ package ru.yandex.practicum.diplom3.pages;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import ru.yandex.practicum.diplom3.GenerateUser;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.page;
@@ -38,7 +39,7 @@ public class RegisterPage extends AbstractPage {
     @FindBy(how = How.CSS, using = REGISTER_HEADER)
     private SelenideElement registerHeader;
 
-    public RegisteredUserLoginPage registrationUserValidData(String name, String email, String password) {
+    public RegisteredUserLoginPage registrationUserHardCore(String name, String email, String password) {
         setFieldName(name);
         setFieldEmail(email);
         setFieldPassword(password);
@@ -50,14 +51,23 @@ public class RegisterPage extends AbstractPage {
         return registeredUserLoginPage;
     }
 
-    public RegisterPage registrationUserNotValidData(String name, String email, String password) {
-        setFieldName(name);
-        setFieldEmail(email);
-        setFieldPassword(password);
+    public RegisteredUserLoginPage registrationUserValidData(GenerateUser user) {
+        setFieldName(user.getName());
+        setFieldEmail(user.getEmail());
+        setFieldPassword(user.getValidPassword());
         clickLoginButton();
 
-        loginPage = page(LoginPage.class);
-        loginPage.waitForLoginPage();
+        registeredUserLoginPage = page(RegisteredUserLoginPage.class);
+        registeredUserLoginPage.waitForRegisteredUserLoginPage();
+
+        return registeredUserLoginPage;
+    }
+
+    public RegisterPage registrationUserNotValidData(GenerateUser user) {
+        setFieldName(user.getName());
+        setFieldEmail(user.getEmail());
+        setFieldPassword(user.getNotValidPassword());
+        clickLoginButton();
 
         return this;
     }

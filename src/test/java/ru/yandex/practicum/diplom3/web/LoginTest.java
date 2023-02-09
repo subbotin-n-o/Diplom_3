@@ -2,6 +2,7 @@ package ru.yandex.practicum.diplom3.web;
 
 import org.junit.Before;
 import org.junit.Test;
+import ru.yandex.practicum.diplom3.GenerateUser;
 import ru.yandex.practicum.diplom3.pages.HomePage;
 
 import java.io.IOException;
@@ -18,17 +19,28 @@ public class LoginTest extends BaseTest {
 
     @Before
     public void setUP() throws IOException {
-        initBrowser(GOOGLE_CHROME);
+        initBrowser(YANDEX_BROWSER);
+        createUser();
     }
 
     @Test
     public void checkLoginRegisteredUser() {
-
         assertTrue(open(BASE_URL, HomePage.class)
                 .openLoginPage(SIGN_IN_BUTTON)
                 .openRegisterPage()
-                .registrationUserValidData("katlyn", "katlyn.towne@yahoo.com", "0cxihbc8")
-                .signIn("katlyn.towne@yahoo.com", "0cxihbc8")
+                .registrationUserValidData(user)
+                .signIn(user)
+                .openProfilePage()
+                .isProfilePage());
+    }
+
+    @Test
+    public void checkLoginRegisteredUserHardCore() {
+        assertTrue(open(BASE_URL, HomePage.class)
+                .openLoginPage(SIGN_IN_BUTTON)
+                .openRegisterPage()
+                .registrationUserHardCore("user0000", "user0000@gmail.com", "password")
+                .signInHardCore("user0000@gmail.com", "password")
                 .openProfilePage()
                 .isProfilePage());
     }

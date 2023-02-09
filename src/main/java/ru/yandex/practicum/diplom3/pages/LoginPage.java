@@ -50,10 +50,6 @@ public class LoginPage extends AbstractPage {
         return forgotPasswordPage;
     }
 
-    protected void clickLoginButton() {
-        loginButton.click();
-    }
-
     public String getTextLoginHeader() {
         return loginHeader.getText();
     }

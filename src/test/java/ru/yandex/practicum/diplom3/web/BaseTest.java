@@ -10,17 +10,18 @@ import static ru.yandex.practicum.diplom3.web.BrowserType.GOOGLE_CHROME;
 import static ru.yandex.practicum.diplom3.web.BrowserType.YANDEX_BROWSER;
 
 public class BaseTest {
-    final String BASE_URL = "https://stellarburgers.nomoreparties.site/";
 
-    GenerateUser generateUser = new GenerateUser();
+    protected final String BASE_URL = "https://stellarburgers.nomoreparties.site/";
 
     private static final String CHROME = "chrome";
+    private static final String DRIVER_PATH = "/Users/nikitasubbotin/tools/chromedriver";
     private static final String YA_BINARY = "/Applications/Yandex.app/Contents/MacOS/Yandex";
     private static final String FULL_HD_SIZE = "1920x1080";
 
-    public static void initBrowser(BrowserType type) throws IOException {
-        //System.getProperties().load(ClassLoader.getSystemResourceAsStream("config.properties"));
-        System.setProperty("webdriver.chrome.driver", "/Users/nikitasubbotin/tools/chromedriver");
+    protected GenerateUser user;
+
+    protected static void initBrowser(BrowserType type) throws IOException {
+        System.setProperty("webdriver.chrome.driver", DRIVER_PATH);
 
         if (type.equals(GOOGLE_CHROME)) {
             Configuration.browser = CHROME;
@@ -37,7 +38,13 @@ public class BaseTest {
         Configuration.headless = false;
     }
 
-    public void browserClose() {
+    protected GenerateUser createUser() {
+        user = new GenerateUser();
+        return user;
+    }
+
+    protected void browserClose() {
+        Selenide.clearBrowserCookies();
         Selenide.closeWebDriver();
     }
 }
