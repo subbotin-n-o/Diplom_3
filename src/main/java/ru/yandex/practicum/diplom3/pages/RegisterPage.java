@@ -3,7 +3,6 @@ package ru.yandex.practicum.diplom3.pages;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import ru.yandex.practicum.diplom3.GenerateUser;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.page;
@@ -46,7 +45,7 @@ public class RegisterPage extends AbstractPage {
         clickLoginButton();
 
         registeredUserLoginPage = page(RegisteredUserLoginPage.class);
-        registeredUserLoginPage.waitForRegisteredUserLoginPage();
+        registeredUserLoginPage.waitForLoginPage();
 
         return registeredUserLoginPage;
     }

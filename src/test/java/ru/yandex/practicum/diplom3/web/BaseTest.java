@@ -12,7 +12,7 @@ import static ru.yandex.practicum.diplom3.web.BrowserType.YANDEX_BROWSER;
 public class BaseTest {
     final String BASE_URL = "https://stellarburgers.nomoreparties.site/";
 
-    GenerateUser user = new GenerateUser();
+    GenerateUser generateUser = new GenerateUser();
 
     private static final String CHROME = "chrome";
     private static final String YA_BINARY = "/Applications/Yandex.app/Contents/MacOS/Yandex";
@@ -20,6 +20,7 @@ public class BaseTest {
 
     public static void initBrowser(BrowserType type) throws IOException {
         //System.getProperties().load(ClassLoader.getSystemResourceAsStream("config.properties"));
+        System.setProperty("webdriver.chrome.driver", "/Users/nikitasubbotin/tools/chromedriver");
 
         if (type.equals(GOOGLE_CHROME)) {
             Configuration.browser = CHROME;

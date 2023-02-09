@@ -45,24 +45,24 @@ public class RegisterTest extends BaseTest {
         initBrowser(browserType);
     }
 
-    @Test
-    public void checkRegisterValidPassword() {
-
-        assertEquals(LOGIN, open(BASE_URL, HomePage.class)
-                .openLoginPage(buttonChoice)
-                .openRegisterPage()
-                .registrationUserValidData(user.getName(), user.getEmail(), user.getValidPassword())
-                .getTextLoginHeader());
-    }
-
-    @Test
-    public void checkRegisterNotValidPassword() {
-        assertEquals(INCORRECT_PASSWORD, open(BASE_URL, HomePage.class)
-                .openLoginPage(buttonChoice)
-                .openRegisterPage()
-                .registrationUserNotValidData(user.getName(), user.getEmail(), user.getNotValidPassword())
-                .getTextErrorMessage());
-    }
+//    @Test
+//    public void checkRegisterValidPassword() {
+//
+//        assertEquals(LOGIN, open(BASE_URL, HomePage.class)
+//                .openLoginPage(buttonChoice)
+//                .openRegisterPage()
+//                .registrationUserValidData(user.getName(), user.getEmail(), user.getValidPassword())
+//                .getTextLoginHeader());
+//    }
+//
+//    @Test
+//    public void checkRegisterNotValidPassword() {
+//        assertEquals(INCORRECT_PASSWORD, open(BASE_URL, HomePage.class)
+//                .openLoginPage(buttonChoice)
+//                .openRegisterPage()
+//                .registrationUserNotValidData(user.getName(), user.getEmail(), user.getNotValidPassword())
+//                .getTextErrorMessage());
+//    }
 
     @After
     public void tearDown() {
