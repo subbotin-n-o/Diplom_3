@@ -7,17 +7,17 @@ import org.openqa.selenium.support.How;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
 
-public class LoginPage {
+public class LoginPage extends AbstractPage {
 
-    private static final String LOGIN_BTN = ".button_button__33qZ0";
+    private static final String LOGIN_BTN = ".//*[@id='root']/div/main/div/form/button";
     private static final String REGISTER_BTN = "Зарегистрироваться";
     private static final String RESTORE_PASSWORD_BTN = "Восстановить пароль";
     private static final String FIELD_EMAIL = ".//form/fieldset[1]/div/div/input";
     private static final String FIELD_PASSWORD = ".//form/fieldset[2]/div/div/input";
-    private static final String LOGIN_HEADER = ".Auth_login__3hAey > h2";
+    private static final String LOGIN_HEADER = ".//*[@id='root']/div/main/div/h2";
 
-    @FindBy(how = How.CSS, using = LOGIN_BTN)
-    private SelenideElement loginButton;
+    @FindBy(how = How.XPATH, using = LOGIN_BTN)
+    protected SelenideElement loginButton;
 
     @FindBy(how = How.LINK_TEXT, using = REGISTER_BTN)
     private SelenideElement registerButton;
@@ -26,28 +26,18 @@ public class LoginPage {
     private SelenideElement restorePasswordButton;
 
     @FindBy(how = How.XPATH, using = FIELD_EMAIL)
-    private SelenideElement fieldEmail;
+    protected SelenideElement fieldEmail;
 
     @FindBy(how = How.XPATH, using = FIELD_PASSWORD)
-    private SelenideElement fieldPassword;
+    protected SelenideElement fieldPassword;
 
-    @FindBy(how = How.CSS, using = LOGIN_HEADER)
-    private SelenideElement loginHeader;
-
-    public HomePage signIn(String email, String password) {
-        setFieldEmail(email);
-        setFieldPassword(password);
-        clickLoginButton();
-
-        HomePage homePage = page(HomePage.class);
-        homePage.waitForHomePage();
-        return homePage;
-    }
+    @FindBy(how = How.XPATH, using = LOGIN_HEADER)
+    protected SelenideElement loginHeader;
 
     public RegisterPage openRegisterPage() {
         registerButton.click();
 
-        RegisterPage registerPage = page(RegisterPage.class);
+        registerPage = page(RegisterPage.class);
         registerPage.waitForRegisterPage();
         return registerPage;
     }
@@ -55,9 +45,31 @@ public class LoginPage {
     public ForgotPasswordPage openRestorePasswordPage() {
         restorePasswordButton.click();
 
-        ForgotPasswordPage forgotPasswordPage = page(ForgotPasswordPage.class);
+        forgotPasswordPage = page(ForgotPasswordPage.class);
         forgotPasswordPage.waitForForgotPasswordPage();
         return forgotPasswordPage;
+    }
+
+    protected void clickLoginButton() {
+        loginButton.click();
+    }
+
+    public String getTextLoginHeader() {
+        return loginHeader.getText();
+    }
+
+    public void waitForLoginPage() {
+        loginHeader.should(visible);
+    }
+
+    public RegisteredUserHomePage signIn(String email, String password) {
+        setFieldEmail(email);
+        setFieldPassword(password);
+        clickLoginButton();
+
+        registeredUserHomePage = page(RegisteredUserHomePage.class);
+        registeredUserHomePage.waitForRegisteredUserHomePage();
+        return registeredUserHomePage;
     }
 
     private void setFieldEmail(String email) {
@@ -68,15 +80,7 @@ public class LoginPage {
         fieldPassword.setValue(password);
     }
 
-    private void clickLoginButton() {
-        loginButton.click();
-    }
-
-    public String getTextLoginHeader() {
-        return loginHeader.getText();
-    }
-
-    public void waitForLoginPage() {
+    public void waitForRegisteredUserLoginPage() {
         loginHeader.should(visible);
     }
 

@@ -3,13 +3,12 @@ package ru.yandex.practicum.diplom3.pages;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import ru.yandex.practicum.diplom3.GenerateUser;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.page;
-import static ru.yandex.practicum.diplom3.GenerateRandomData.*;
-import static ru.yandex.practicum.diplom3.GenerateRandomData.getRandomNotValidPassword;
 
-public class RegisterPage {
+public class RegisterPage extends AbstractPage {
 
     public static final String FIELD_NAME = ".//form/fieldset[1]/div/div/input";
     public static final String FIELD_EMAIL = ".//form/fieldset[2]/div/div/input";
@@ -18,11 +17,6 @@ public class RegisterPage {
     public static final String LOGIN_BTN = "Войти";
     public static final String ERROR_MESSAGE = ".input__error";
     public static final String REGISTER_HEADER = ".Auth_login__3hAey > h2:nth-child(1)";
-
-    public static final String NAME = getRandomName();
-    public static final String EMAIL = getRandomEmail();
-    public static final String VALID_PASSWORD = getRandomValidPassword();
-    public static final String NOT_VALID_PASSWORD = getRandomNotValidPassword();
 
     @FindBy(how = How.XPATH, using = FIELD_NAME)
     private SelenideElement fieldName;
@@ -45,25 +39,25 @@ public class RegisterPage {
     @FindBy(how = How.CSS, using = REGISTER_HEADER)
     private SelenideElement registerHeader;
 
-    public LoginPage validLogin() {
-        setFieldName(NAME);
-        setFieldEmail(EMAIL);
-        setFieldPassword(VALID_PASSWORD);
+    public RegisteredUserLoginPage registrationUserValidData(String name, String email, String password) {
+        setFieldName(name);
+        setFieldEmail(email);
+        setFieldPassword(password);
         clickLoginButton();
 
-        LoginPage loginPage = page(LoginPage.class);
-        loginPage.waitForLoginPage();
+        registeredUserLoginPage = page(RegisteredUserLoginPage.class);
+        registeredUserLoginPage.waitForRegisteredUserLoginPage();
 
-        return loginPage;
+        return registeredUserLoginPage;
     }
 
-    public RegisterPage notValidLogin() {
-        setFieldName(NAME);
-        setFieldEmail(EMAIL);
-        setFieldPassword(NOT_VALID_PASSWORD);
+    public RegisterPage registrationUserNotValidData(String name, String email, String password) {
+        setFieldName(name);
+        setFieldEmail(email);
+        setFieldPassword(password);
         clickLoginButton();
 
-        LoginPage loginPage = page(LoginPage.class);
+        loginPage = page(LoginPage.class);
         loginPage.waitForLoginPage();
 
         return this;

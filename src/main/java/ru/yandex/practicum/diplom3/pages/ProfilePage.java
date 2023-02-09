@@ -6,7 +6,7 @@ import org.openqa.selenium.support.How;
 
 import static com.codeborne.selenide.Condition.visible;
 
-public class ProfilePage {
+public class ProfilePage extends AbstractPage {
 
     private static final String PROFILE_TEXT = ".//nav/p";
 
