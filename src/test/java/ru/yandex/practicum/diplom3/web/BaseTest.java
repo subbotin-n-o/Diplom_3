@@ -19,7 +19,7 @@ public class BaseTest {
     private static final String FULL_HD_SIZE = "1920x1080";
 
     public static void initBrowser(BrowserType type) throws IOException {
-        System.getProperties().load(ClassLoader.getSystemResourceAsStream("config.properties"));
+        //System.getProperties().load(ClassLoader.getSystemResourceAsStream("config.properties"));
 
         if (type.equals(GOOGLE_CHROME)) {
             Configuration.browser = CHROME;

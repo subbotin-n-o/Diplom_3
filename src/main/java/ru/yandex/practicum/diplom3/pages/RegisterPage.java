@@ -12,9 +12,9 @@ public class RegisterPage extends AbstractPage {
 
     public static final String FIELD_NAME = ".//form/fieldset[1]/div/div/input";
     public static final String FIELD_EMAIL = ".//form/fieldset[2]/div/div/input";
-    public static final String FIELD_PASSWORD = "Пароль";
-    public static final String REGISTER_BTN = "Зарегистрироваться";
-    public static final String LOGIN_BTN = "Войти";
+    public static final String FIELD_PASSWORD = ".//form/fieldset[3]/div/div/input";
+    public static final String REGISTER_BTN = ".//*[@id='root']/div/main/div/form/button";
+    public static final String LOGIN_BTN = ".//*[@id='root']/div/main/div/div/p/a";
     public static final String ERROR_MESSAGE = ".input__error";
     public static final String REGISTER_HEADER = ".Auth_login__3hAey > h2:nth-child(1)";
 
@@ -24,13 +24,13 @@ public class RegisterPage extends AbstractPage {
     @FindBy(how = How.XPATH, using = FIELD_EMAIL)
     private SelenideElement fieldEmail;
 
-    @FindBy(how = How.NAME, using = FIELD_PASSWORD)
+    @FindBy(how = How.XPATH, using = FIELD_PASSWORD)
     private SelenideElement fieldPassword;
 
-    @FindBy(how = How.LINK_TEXT, using = REGISTER_BTN)
+    @FindBy(how = How.XPATH, using = REGISTER_BTN)
     private SelenideElement registerButton;
 
-    @FindBy(how = How.LINK_TEXT, using = LOGIN_BTN)
+    @FindBy(how = How.XPATH, using = LOGIN_BTN)
     private SelenideElement loginButton;
 
     @FindBy(how = How.CSS, using = ERROR_MESSAGE)
@@ -43,7 +43,7 @@ public class RegisterPage extends AbstractPage {
         setFieldName(user.getName());
         setFieldEmail(user.getEmail());
         setFieldPassword(user.getValidPassword());
-        clickLoginButton();
+        clickRegisterButton();
 
         registeredUserLoginPage = page(RegisteredUserLoginPage.class);
         registeredUserLoginPage.waitForRegisteredUserLoginPage();
@@ -89,6 +89,10 @@ public class RegisterPage extends AbstractPage {
 
     private void clickLoginButton() {
         loginButton.click();
+    }
+
+    private void clickRegisterButton() {
+        registerButton.click();
     }
 
     public String getTextErrorMessage() {

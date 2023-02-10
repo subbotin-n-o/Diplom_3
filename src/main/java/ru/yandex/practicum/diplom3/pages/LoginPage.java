@@ -13,20 +13,20 @@ public class LoginPage extends AbstractPage {
 //    private RegisterPage registerPage;
 //    private ForgotPasswordPage forgotPasswordPage;
 
-    private static final String LOGIN_BTN = ".button_button__33qZ0";
-    private static final String REGISTER_BTN = "Зарегистрироваться";
-    private static final String RESTORE_PASSWORD_BTN = "Восстановить пароль";
+    private static final String LOGIN_BTN = ".//*[@id='root']/div/main/div/form/button";
+    private static final String REGISTER_BTN = ".//*[@id='root']/div/main/div/div/p[1]/a";
+    private static final String RESTORE_PASSWORD_BTN = ".//*[@id='root']/div/main/div/div/p[2]/a";
     private static final String FIELD_EMAIL = ".//form/fieldset[1]/div/div/input";
     private static final String FIELD_PASSWORD = ".//form/fieldset[2]/div/div/input";
-    private static final String LOGIN_HEADER = ".Auth_login__3hAey > h2";
+    private static final String LOGIN_HEADER = ".//*[@id='root']/div/main/div/h2";
 
-    @FindBy(how = How.CSS, using = LOGIN_BTN)
+    @FindBy(how = How.XPATH, using = LOGIN_BTN)
     protected SelenideElement loginButton;
 
-    @FindBy(how = How.LINK_TEXT, using = REGISTER_BTN)
+    @FindBy(how = How.XPATH, using = REGISTER_BTN)
     protected SelenideElement registerButton;
 
-    @FindBy(how = How.LINK_TEXT, using = RESTORE_PASSWORD_BTN)
+    @FindBy(how = How.XPATH, using = RESTORE_PASSWORD_BTN)
     protected SelenideElement restorePasswordButton;
 
     @FindBy(how = How.XPATH, using = FIELD_EMAIL)
@@ -35,7 +35,7 @@ public class LoginPage extends AbstractPage {
     @FindBy(how = How.XPATH, using = FIELD_PASSWORD)
     protected SelenideElement fieldPassword;
 
-    @FindBy(how = How.CSS, using = LOGIN_HEADER)
+    @FindBy(how = How.XPATH, using = LOGIN_HEADER)
     protected SelenideElement loginHeader;
 
 //    public HomePage signIn(String email, String password) {

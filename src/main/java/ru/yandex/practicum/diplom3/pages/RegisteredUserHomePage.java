@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.page;
 
 public class RegisteredUserHomePage extends HomePage {
 
-    private static final String LK_BTN = ".//header/nav/a/p";
+    private static final String LK_BTN = ".//*[@id='root']/div/header/nav/a/p";
 
     @FindBy(how = How.XPATH, using = LK_BTN)
     protected SelenideElement lkButton;

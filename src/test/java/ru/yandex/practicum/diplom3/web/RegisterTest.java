@@ -43,6 +43,7 @@ public class RegisterTest extends BaseTest {
     @Before
     public void setUP() throws IOException {
         initBrowser(browserType);
+        createUser();
     }
 
     @Test
