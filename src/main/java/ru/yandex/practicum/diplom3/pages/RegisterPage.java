@@ -5,6 +5,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import ru.yandex.practicum.diplom3.GenerateUser;
 
+import java.time.Duration;
+
+import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.page;
 
@@ -16,7 +19,7 @@ public class RegisterPage extends AbstractPage {
     public static final String REGISTER_BTN = ".//*[@id='root']/div/main/div/form/button";
     public static final String LOGIN_BTN = ".//*[@id='root']/div/main/div/div/p/a";
     public static final String ERROR_MESSAGE = ".input__error";
-    public static final String REGISTER_HEADER = ".Auth_login__3hAey > h2:nth-child(1)";
+    public static final String REGISTER_HEADER = ".//h2[contains(text(),'Регистрация')]";
 
     @FindBy(how = How.XPATH, using = FIELD_NAME)
     private SelenideElement fieldName;
@@ -36,7 +39,7 @@ public class RegisterPage extends AbstractPage {
     @FindBy(how = How.CSS, using = ERROR_MESSAGE)
     private SelenideElement errorMessage;
 
-    @FindBy(how = How.CSS, using = REGISTER_HEADER)
+    @FindBy(how = How.XPATH, using = REGISTER_HEADER)
     private SelenideElement registerHeader;
 
     public RegisteredUserLoginPage registrationUserValidData(GenerateUser user) {
@@ -51,26 +54,11 @@ public class RegisterPage extends AbstractPage {
         return registeredUserLoginPage;
     }
 
-    public RegisteredUserLoginPage registrationUserValidData(String name, String email, String password) {
-        setFieldName(name);
-        setFieldEmail(email);
-        setFieldPassword(password);
-        clickLoginButton();
-
-        registeredUserLoginPage = page(RegisteredUserLoginPage.class);
-        registeredUserLoginPage.waitForRegisteredUserLoginPage();
-
-        return registeredUserLoginPage;
-    }
-
-    public RegisterPage registrationUserNotValidData(String name, String email, String password) {
-        setFieldName(name);
-        setFieldEmail(email);
-        setFieldPassword(password);
-        clickLoginButton();
-
-        loginPage = page(LoginPage.class);
-        loginPage.waitForLoginPage();
+    public RegisterPage registrationUserNotValidData(GenerateUser user) {
+        setFieldName(user.getName());
+        setFieldEmail(user.getEmail());
+        setFieldPassword(user.getNotValidPassword());
+        clickRegisterButton();
 
         return this;
     }
@@ -92,7 +80,7 @@ public class RegisterPage extends AbstractPage {
     }
 
     private void clickRegisterButton() {
-        registerButton.click();
+        registerButton.shouldBe(enabled, Duration.ofSeconds(8)).click();
     }
 
     public String getTextErrorMessage() {

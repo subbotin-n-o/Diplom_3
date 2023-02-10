@@ -9,16 +9,12 @@ import static com.codeborne.selenide.Condition.*;
 
 public class LoginPage extends AbstractPage {
 
-//    private HomePage homePage;
-//    private RegisterPage registerPage;
-//    private ForgotPasswordPage forgotPasswordPage;
-
     private static final String LOGIN_BTN = ".//*[@id='root']/div/main/div/form/button";
     private static final String REGISTER_BTN = ".//*[@id='root']/div/main/div/div/p[1]/a";
     private static final String RESTORE_PASSWORD_BTN = ".//*[@id='root']/div/main/div/div/p[2]/a";
     private static final String FIELD_EMAIL = ".//form/fieldset[1]/div/div/input";
     private static final String FIELD_PASSWORD = ".//form/fieldset[2]/div/div/input";
-    private static final String LOGIN_HEADER = ".//*[@id='root']/div/main/div/h2";
+    private static final String LOGIN_HEADER = ".//h2[contains(text(),'Вход')]";
 
     @FindBy(how = How.XPATH, using = LOGIN_BTN)
     protected SelenideElement loginButton;
@@ -37,26 +33,6 @@ public class LoginPage extends AbstractPage {
 
     @FindBy(how = How.XPATH, using = LOGIN_HEADER)
     protected SelenideElement loginHeader;
-
-//    public HomePage signIn(String email, String password) {
-//        setFieldEmail(email);
-//        setFieldPassword(password);
-//        clickLoginButton();
-//
-//        homePage = page(HomePage.class);
-//        homePage.waitForHomePage();
-//        return homePage;
-//    }
-
-//    public HomePage signIn() {
-//        setFieldEmail("boyce.koepp@yahoo.com");
-//        setFieldPassword("fsswhthe");
-//        clickLoginButton();
-//
-//        homePage = page(HomePage.class);
-//        homePage.waitForHomePage();
-//        return homePage;
-//    }
 
     public RegisterPage openRegisterPage() {
         registerButton.click();

@@ -11,10 +11,10 @@ public class RegisteredUserHomePage extends HomePage {
 
     private static final String LK_BTN = ".//*[@id='root']/div/header/nav/a/p";
 
+    private static final String CHECKOUT = ".//section[2]/div/button";
+
     @FindBy(how = How.XPATH, using = LK_BTN)
     protected SelenideElement lkButton;
-
-    private static final String CHECKOUT = ".//section[2]/div/button";
 
     @FindBy(how = How.XPATH, using = CHECKOUT)
     private SelenideElement checkoutButton;

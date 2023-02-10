@@ -5,11 +5,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import ru.yandex.practicum.diplom3.pages.HomePage;
 
 import java.io.IOException;
 
-import static com.codeborne.selenide.Selenide.open;
 import static org.junit.Assert.assertEquals;
 import static ru.yandex.practicum.diplom3.web.BrowserType.GOOGLE_CHROME;
 
@@ -49,19 +47,19 @@ public class RegisterTest extends BaseTest {
     @Test
     public void checkRegisterValidPassword() {
 
-        assertEquals(LOGIN, open(BASE_URL, HomePage.class)
+        assertEquals(LOGIN, openHomePage()
                 .openLoginPage(buttonChoice)
                 .openRegisterPage()
-                .registrationUserValidData(user.getName(), user.getEmail(), user.getValidPassword())
+                .registrationUserValidData(user)
                 .getTextLoginHeader());
     }
 
     @Test
     public void checkRegisterNotValidPassword() {
-        assertEquals(INCORRECT_PASSWORD, open(BASE_URL, HomePage.class)
+        assertEquals(INCORRECT_PASSWORD, openHomePage()
                 .openLoginPage(buttonChoice)
                 .openRegisterPage()
-                .registrationUserNotValidData(user.getName(), user.getEmail(), user.getNotValidPassword())
+                .registrationUserNotValidData(user)
                 .getTextErrorMessage());
     }
 

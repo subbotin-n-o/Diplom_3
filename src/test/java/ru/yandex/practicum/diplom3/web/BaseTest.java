@@ -3,9 +3,11 @@ package ru.yandex.practicum.diplom3.web;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import ru.yandex.practicum.diplom3.GenerateUser;
+import ru.yandex.practicum.diplom3.pages.HomePage;
 
 import java.io.IOException;
 
+import static com.codeborne.selenide.Selenide.open;
 import static ru.yandex.practicum.diplom3.web.BrowserType.GOOGLE_CHROME;
 import static ru.yandex.practicum.diplom3.web.BrowserType.YANDEX_BROWSER;
 
@@ -18,8 +20,12 @@ public class BaseTest {
     private static final String YA_BINARY = "/Applications/Yandex.app/Contents/MacOS/Yandex";
     private static final String FULL_HD_SIZE = "1920x1080";
 
-    public static void initBrowser(BrowserType type) throws IOException {
-        //System.getProperties().load(ClassLoader.getSystemResourceAsStream("config.properties"));
+    protected HomePage openHomePage() {
+        return open(BASE_URL, HomePage.class);
+    }
+
+    protected static void initBrowser(BrowserType type) throws IOException {
+        System.getProperties().load(ClassLoader.getSystemResourceAsStream("config.properties"));
 
         if (type.equals(GOOGLE_CHROME)) {
             Configuration.browser = CHROME;
