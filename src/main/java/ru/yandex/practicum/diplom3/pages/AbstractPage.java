@@ -16,10 +16,14 @@ abstract public class AbstractPage {
     protected RestorePasswordPage forgotPasswordPage;
 
     private static final String LK_BTN = ".//p[contains(text(),'Личный Кабинет')]";
+    private static final String CONSTRUCTOR_BTN = ".//p[contains(text(),'Конструктор')]";
     private static final String LOGO_STELLAR_BURGERS = "/html/body/div/div/header/nav/div/a";
 
     @FindBy(how = How.XPATH, using = LK_BTN)
     protected SelenideElement lkButton;
+
+    @FindBy(how = How.XPATH, using = CONSTRUCTOR_BTN)
+    protected SelenideElement constructorButton;
 
     @FindBy(how = How.XPATH, using = LOGO_STELLAR_BURGERS)
     protected SelenideElement logoBurgers;
@@ -30,6 +34,10 @@ abstract public class AbstractPage {
 
     protected void clickLogoBurgers() {
         logoBurgers.should(visible).click();
+    }
+
+    protected void clickConstructorButton() {
+        constructorButton.click();
     }
 
     public HomePage backToHomePage() {

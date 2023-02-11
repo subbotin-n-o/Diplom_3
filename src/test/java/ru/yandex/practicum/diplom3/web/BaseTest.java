@@ -40,7 +40,7 @@ public class BaseTest {
     private static void setOptions() {
         Configuration.driverManagerEnabled = true;
         Configuration.browserSize = FULL_HD_SIZE;
-        Configuration.headless = true;
+        Configuration.headless = false;
     }
 
     protected void createUser() {
