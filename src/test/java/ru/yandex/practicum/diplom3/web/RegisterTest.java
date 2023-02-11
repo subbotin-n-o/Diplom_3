@@ -1,5 +1,6 @@
 package ru.yandex.practicum.diplom3.web;
 
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -46,6 +47,7 @@ public class RegisterTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Check user registration with valid data")
     public void checkRegisterValidPassword() {
         assertEquals(LOGIN, openHomePage()
                 .openLoginPage(buttonChoice)
@@ -55,6 +57,7 @@ public class RegisterTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Check user registration with invalid password")
     public void checkRegisterNotValidPassword() {
         assertEquals(INCORRECT_PASSWORD, openHomePage()
                 .openLoginPage(buttonChoice)
