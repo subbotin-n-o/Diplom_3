@@ -9,10 +9,7 @@ import static com.codeborne.selenide.Selenide.page;
 
 public class HomePage extends AbstractPage {
 
-
     private static final String SIGN_IN_BTN = ".//button[contains(text(),'Войти в аккаунт')]";
-
-
 
     @FindBy(how = How.XPATH, using = SIGN_IN_BTN)
     private SelenideElement signInButton;

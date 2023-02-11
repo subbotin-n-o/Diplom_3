@@ -3,7 +3,7 @@ package ru.yandex.practicum.diplom3.pages;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import ru.yandex.practicum.diplom3.GenerateUser;
+import ru.yandex.practicum.diplom3.helpers.GenerateUser;
 
 import java.time.Duration;
 
@@ -42,16 +42,16 @@ public class RegisterPage extends AbstractPage {
     @FindBy(how = How.CSS, using = ERROR_MESSAGE)
     private SelenideElement errorMessage;
 
-    public RegisteredUserLoginPage registrationUserValidData(GenerateUser user) {
+    public LoginPage registrationUserValidData(GenerateUser user) {
         setFieldName(user.getName());
         setFieldEmail(user.getEmail());
         setFieldPassword(user.getValidPassword());
         clickRegisterButton();
 
-        registeredUserLoginPage = page(RegisteredUserLoginPage.class);
-        registeredUserLoginPage.waitPage();
+        loginPage = page(LoginPage.class);
+        loginPage.waitPage();
 
-        return registeredUserLoginPage;
+        return loginPage;
     }
 
     public RegisterPage registrationUserNotValidData(GenerateUser user) {

@@ -1,4 +1,4 @@
-package ru.yandex.practicum.diplom3;
+package ru.yandex.practicum.diplom3.helpers;
 
 import com.github.javafaker.Faker;
 

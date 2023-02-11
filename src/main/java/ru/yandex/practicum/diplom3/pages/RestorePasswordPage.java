@@ -7,13 +7,13 @@ import org.openqa.selenium.support.How;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.page;
 
-public class ForgotPasswordPage extends AbstractPage {
+public class RestorePasswordPage extends AbstractPage {
 
     private static final String RESTORE_PASSWORD_HEADER = ".//h2[contains(text(),'Восстановление пароля')]";
     private static final String SIGN_IN_BTN = ".//a[contains(text(),'Войти')]";
 
     @FindBy(how = How.XPATH, using = RESTORE_PASSWORD_HEADER)
-    private SelenideElement forgotPasswordHeader;
+    private SelenideElement restorePasswordHeader;
 
     @FindBy(how = How.XPATH, using = SIGN_IN_BTN)
     private SelenideElement signInButton;
@@ -32,7 +32,7 @@ public class ForgotPasswordPage extends AbstractPage {
 
     @Override
     public void waitPage() {
-        forgotPasswordHeader.should(visible);
+        restorePasswordHeader.should(visible);
     }
 
 }

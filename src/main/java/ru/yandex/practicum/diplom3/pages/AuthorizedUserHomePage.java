@@ -7,7 +7,7 @@ import org.openqa.selenium.support.How;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.page;
 
-public class RegisteredUserHomePage extends HomePage {
+public class AuthorizedUserHomePage extends HomePage {
 
     private static final String CHECKOUT = ".//button[contains(text(),'Оформить заказ')]";
 
@@ -22,7 +22,7 @@ public class RegisteredUserHomePage extends HomePage {
         return profilePage;
     }
 
-    public Boolean isRegisteredUserHomePage() {
+    public Boolean isAuthorizedUserHomePage() {
         return checkoutButton.getText().equals("Оформить заказ");
     }
 

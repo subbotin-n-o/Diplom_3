@@ -2,7 +2,7 @@ package ru.yandex.practicum.diplom3.web;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
-import ru.yandex.practicum.diplom3.GenerateUser;
+import ru.yandex.practicum.diplom3.helpers.GenerateUser;
 import ru.yandex.practicum.diplom3.pages.HomePage;
 
 import java.io.IOException;
@@ -39,7 +39,7 @@ public class BaseTest {
     private static void setOptions() {
         Configuration.driverManagerEnabled = true;
         Configuration.browserSize = FULL_HD_SIZE;
-        Configuration.headless = false;
+        Configuration.headless = true;
     }
 
     protected void createUser() {

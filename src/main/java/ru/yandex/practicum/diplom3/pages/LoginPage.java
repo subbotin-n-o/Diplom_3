@@ -3,6 +3,7 @@ package ru.yandex.practicum.diplom3.pages;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import ru.yandex.practicum.diplom3.helpers.GenerateUser;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
@@ -34,6 +35,24 @@ public class LoginPage extends AbstractPage {
     @FindBy(how = How.XPATH, using = RESTORE_PASSWORD_BTN)
     private SelenideElement restorePasswordButton;
 
+    public AuthorizedUserHomePage signIn(GenerateUser user) {
+        setFieldEmail(user.getEmail());
+        setFieldPassword(user.getValidPassword());
+        clickLoginButton();
+
+        authorizedUserHomePage = page(AuthorizedUserHomePage.class);
+        authorizedUserHomePage.waitPage();
+        return authorizedUserHomePage;
+    }
+
+    private void setFieldEmail(String email) {
+        fieldEmail.setValue(email);
+    }
+
+    private void setFieldPassword(String password) {
+        fieldPassword.setValue(password);
+    }
+
     public RegisterPage openRegisterPage() {
         clickRegisterButton();
 
@@ -42,10 +61,10 @@ public class LoginPage extends AbstractPage {
         return registerPage;
     }
 
-    public ForgotPasswordPage openRestorePasswordPage() {
+    public RestorePasswordPage openRestorePasswordPage() {
         clickRestorePasswordButton();
 
-        forgotPasswordPage = page(ForgotPasswordPage.class);
+        forgotPasswordPage = page(RestorePasswordPage.class);
         forgotPasswordPage.waitPage();
         return forgotPasswordPage;
     }

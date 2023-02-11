@@ -4,23 +4,43 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.page;
+
 abstract public class AbstractPage {
-    protected RegisteredUserHomePage registeredUserHomePage;
+    protected HomePage homePage;
+    protected AuthorizedUserHomePage authorizedUserHomePage;
     protected LoginPage loginPage;
-    protected RegisteredUserLoginPage registeredUserLoginPage;
     protected RegisterPage registerPage;
     protected ProfilePage profilePage;
-    protected ForgotPasswordPage forgotPasswordPage;
+    protected RestorePasswordPage forgotPasswordPage;
 
     private static final String LK_BTN = ".//p[contains(text(),'Личный Кабинет')]";
+    private static final String LOGO_STELLAR_BURGERS = "/html/body/div/div/header/nav/div/a";
 
     @FindBy(how = How.XPATH, using = LK_BTN)
     protected SelenideElement lkButton;
+
+    @FindBy(how = How.XPATH, using = LOGO_STELLAR_BURGERS)
+    protected SelenideElement logoBurgers;
 
     protected void clickLkButton() {
         lkButton.click();
     }
 
-    public void waitPage() {
+    protected void clickLogoBurgers() {
+        logoBurgers.should(visible).click();
+    }
+
+    public HomePage backToHomePage() {
+        clickLogoBurgers();
+
+        homePage = page(HomePage.class);
+        homePage.waitPage();
+
+        return homePage;
+    }
+
+    protected void waitPage() {
     }
 }
