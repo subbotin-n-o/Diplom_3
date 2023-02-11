@@ -18,7 +18,7 @@ public class RegisterPage extends AbstractPage {
     private static final String FIELD_EMAIL = ".//form/fieldset[2]/div/div/input";
     private static final String FIELD_PASSWORD = ".//form/fieldset[3]/div/div/input";
     private static final String REGISTER_BTN = ".//button[contains(text(),'Зарегистрироваться')]";
-    private static final String SIGN_IN_BTN = ".//button[contains(text(),'Зарегистрироваться')]";
+    private static final String SIGN_IN_BTN = ".//a[contains(text(),'Войти')]";
     private static final String ERROR_MESSAGE = ".input__error";
 
     @FindBy(how = How.XPATH, using = REGISTER_HEADER)

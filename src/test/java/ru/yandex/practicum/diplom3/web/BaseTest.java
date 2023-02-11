@@ -7,6 +7,7 @@ import ru.yandex.practicum.diplom3.pages.HomePage;
 
 import java.io.IOException;
 
+import static com.codeborne.selenide.Selenide.forward;
 import static com.codeborne.selenide.Selenide.open;
 import static ru.yandex.practicum.diplom3.web.BrowserType.GOOGLE_CHROME;
 import static ru.yandex.practicum.diplom3.web.BrowserType.YANDEX_BROWSER;
@@ -39,7 +40,7 @@ public class BaseTest {
     private static void setOptions() {
         Configuration.driverManagerEnabled = true;
         Configuration.browserSize = FULL_HD_SIZE;
-        Configuration.headless = true;
+        Configuration.headless = false;
     }
 
     protected void createUser() {
