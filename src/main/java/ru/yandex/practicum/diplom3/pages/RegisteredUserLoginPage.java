@@ -13,17 +13,7 @@ public class RegisteredUserLoginPage extends LoginPage {
         clickLoginButton();
 
         registeredUserHomePage = page(RegisteredUserHomePage.class);
-        registeredUserHomePage.waitForRegisteredUserHomePage();
-        return registeredUserHomePage;
-    }
-
-    public RegisteredUserHomePage signIn(String email, String password) {
-        setFieldEmail(email);
-        setFieldPassword(password);
-        clickLoginButton();
-
-        registeredUserHomePage = page(RegisteredUserHomePage.class);
-        registeredUserHomePage.waitForRegisteredUserHomePage();
+        registeredUserHomePage.waitPage();
         return registeredUserHomePage;
     }
 
@@ -35,9 +25,9 @@ public class RegisteredUserLoginPage extends LoginPage {
         fieldPassword.setValue(password);
     }
 
-    public void waitForRegisteredUserLoginPage() {
+    @Override
+    public void waitPage() {
         loginHeader.should(visible);
     }
-
 
 }

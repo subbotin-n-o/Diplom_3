@@ -9,25 +9,25 @@ import static com.codeborne.selenide.Selenide.page;
 
 public class RegisteredUserHomePage extends HomePage {
 
-    private static final String LK_BTN = ".//*[@id='root']/div/header/nav/a/p";
-
-    private static final String CHECKOUT = ".//section[2]/div/button";
-
-    @FindBy(how = How.XPATH, using = LK_BTN)
-    protected SelenideElement lkButton;
+    private static final String CHECKOUT = ".//button[contains(text(),'Оформить заказ')]";
 
     @FindBy(how = How.XPATH, using = CHECKOUT)
     private SelenideElement checkoutButton;
 
     public ProfilePage openProfilePage() {
-        lkButton.click();
+        clickLkButton();
 
         profilePage = page(ProfilePage.class);
-        profilePage.waitForProfilePage();
+        profilePage.waitPage();
         return profilePage;
     }
 
-    public void waitForRegisteredUserHomePage() {
-        lkButton.should(visible);
+    public Boolean isRegisteredUserHomePage() {
+        return checkoutButton.getText().equals("Оформить заказ");
+    }
+
+    @Override
+    public void waitPage() {
+        checkoutButton.should(visible);
     }
 }

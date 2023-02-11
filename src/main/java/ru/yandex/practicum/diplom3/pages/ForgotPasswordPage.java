@@ -7,26 +7,32 @@ import org.openqa.selenium.support.How;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.page;
 
-public class ForgotPasswordPage {
+public class ForgotPasswordPage extends AbstractPage {
 
-    private static final String RESTORE_PASSWORD_HEADER = ".Auth_login__3hAey > h2";
-    private static final String LOGIN_BTN = "Войти";
+    private static final String RESTORE_PASSWORD_HEADER = ".//h2[contains(text(),'Восстановление пароля')]";
+    private static final String SIGN_IN_BTN = ".//a[contains(text(),'Войти')]";
 
-    @FindBy(how = How.CSS, using = RESTORE_PASSWORD_HEADER)
+    @FindBy(how = How.XPATH, using = RESTORE_PASSWORD_HEADER)
     private SelenideElement forgotPasswordHeader;
 
-    @FindBy(how = How.LINK_TEXT, using = LOGIN_BTN)
-    private SelenideElement loginButton;
+    @FindBy(how = How.XPATH, using = SIGN_IN_BTN)
+    private SelenideElement signInButton;
 
     public LoginPage openLoginPage() {
-        loginButton.click();
+        clickSignInButton();
 
         LoginPage loginPage = page(LoginPage.class);
-        loginPage.waitForLoginPage();
+        loginPage.waitPage();
         return loginPage;
     }
 
-    public void waitForForgotPasswordPage(){
+    private void clickSignInButton() {
+        signInButton.click();
+    }
+
+    @Override
+    public void waitPage() {
         forgotPasswordHeader.should(visible);
     }
+
 }

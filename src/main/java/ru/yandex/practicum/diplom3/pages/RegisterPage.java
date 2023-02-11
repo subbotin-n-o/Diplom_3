@@ -13,13 +13,16 @@ import static com.codeborne.selenide.Selenide.page;
 
 public class RegisterPage extends AbstractPage {
 
-    public static final String FIELD_NAME = ".//form/fieldset[1]/div/div/input";
-    public static final String FIELD_EMAIL = ".//form/fieldset[2]/div/div/input";
-    public static final String FIELD_PASSWORD = ".//form/fieldset[3]/div/div/input";
-    public static final String REGISTER_BTN = ".//*[@id='root']/div/main/div/form/button";
-    public static final String LOGIN_BTN = ".//*[@id='root']/div/main/div/div/p/a";
-    public static final String ERROR_MESSAGE = ".input__error";
-    public static final String REGISTER_HEADER = ".//h2[contains(text(),'Регистрация')]";
+    private static final String REGISTER_HEADER = ".//h2[contains(text(),'Регистрация')]";
+    private static final String FIELD_NAME = ".//form/fieldset[1]/div/div/input";
+    private static final String FIELD_EMAIL = ".//form/fieldset[2]/div/div/input";
+    private static final String FIELD_PASSWORD = ".//form/fieldset[3]/div/div/input";
+    private static final String REGISTER_BTN = ".//button[contains(text(),'Зарегистрироваться')]";
+    private static final String SIGN_IN_BTN = ".//button[contains(text(),'Зарегистрироваться')]";
+    private static final String ERROR_MESSAGE = ".input__error";
+
+    @FindBy(how = How.XPATH, using = REGISTER_HEADER)
+    private SelenideElement registerHeader;
 
     @FindBy(how = How.XPATH, using = FIELD_NAME)
     private SelenideElement fieldName;
@@ -33,14 +36,11 @@ public class RegisterPage extends AbstractPage {
     @FindBy(how = How.XPATH, using = REGISTER_BTN)
     private SelenideElement registerButton;
 
-    @FindBy(how = How.XPATH, using = LOGIN_BTN)
-    private SelenideElement loginButton;
+    @FindBy(how = How.XPATH, using = SIGN_IN_BTN)
+    private SelenideElement signInButton;
 
     @FindBy(how = How.CSS, using = ERROR_MESSAGE)
     private SelenideElement errorMessage;
-
-    @FindBy(how = How.XPATH, using = REGISTER_HEADER)
-    private SelenideElement registerHeader;
 
     public RegisteredUserLoginPage registrationUserValidData(GenerateUser user) {
         setFieldName(user.getName());
@@ -49,7 +49,7 @@ public class RegisterPage extends AbstractPage {
         clickRegisterButton();
 
         registeredUserLoginPage = page(RegisteredUserLoginPage.class);
-        registeredUserLoginPage.waitForRegisteredUserLoginPage();
+        registeredUserLoginPage.waitPage();
 
         return registeredUserLoginPage;
     }
@@ -61,6 +61,15 @@ public class RegisterPage extends AbstractPage {
         clickRegisterButton();
 
         return this;
+    }
+
+    public LoginPage openLoginPage() {
+        clickSignInButton();
+
+        loginPage = page(LoginPage.class);
+        loginPage.waitPage();
+
+        return loginPage;
     }
 
     private void setFieldName(String name) {
@@ -75,24 +84,21 @@ public class RegisterPage extends AbstractPage {
         fieldPassword.setValue(password);
     }
 
-    private void clickLoginButton() {
-        loginButton.click();
-    }
-
     private void clickRegisterButton() {
         registerButton.shouldBe(enabled, Duration.ofSeconds(8)).click();
     }
 
-    public String getTextErrorMessage() {
-        waitForErrorMessage();
-        return errorMessage.getText();
+    private void clickSignInButton() {
+        signInButton.click();
     }
 
-    public void waitForRegisterPage() {
+    public String getTextErrorMessage() {
+        return errorMessage.should(visible).getText();
+    }
+
+    @Override
+    public void waitPage() {
         registerHeader.should(visible);
     }
 
-    private void waitForErrorMessage() {
-        errorMessage.should(visible);
-    }
 }

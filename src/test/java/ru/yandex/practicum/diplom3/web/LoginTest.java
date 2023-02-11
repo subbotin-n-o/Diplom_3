@@ -27,8 +27,7 @@ public class LoginTest extends BaseTest {
                 .openRegisterPage()
                 .registrationUserValidData(user)
                 .signIn(user)
-                .openProfilePage()
-                .isProfilePage());
+                .isRegisteredUserHomePage());
     }
 
 }

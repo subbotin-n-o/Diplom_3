@@ -10,6 +10,7 @@ import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 import static ru.yandex.practicum.diplom3.web.BrowserType.GOOGLE_CHROME;
+import static ru.yandex.practicum.diplom3.web.BrowserType.YANDEX_BROWSER;
 
 @RunWith(Parameterized.class)
 public class RegisterTest extends BaseTest {
@@ -32,9 +33,9 @@ public class RegisterTest extends BaseTest {
     public static Object[][] getData() {
         return new Object[][]{
                 {LK_BUTTON, GOOGLE_CHROME},
-//                {SIGN_IN_BUTTON, GOOGLE_CHROME},
-//                {LK_BUTTON, YANDEX_BROWSER},
-//                {SIGN_IN_BUTTON, YANDEX_BROWSER}
+                {SIGN_IN_BUTTON, GOOGLE_CHROME},
+                {LK_BUTTON, YANDEX_BROWSER},
+                {SIGN_IN_BUTTON, YANDEX_BROWSER}
         };
     }
 
@@ -46,7 +47,6 @@ public class RegisterTest extends BaseTest {
 
     @Test
     public void checkRegisterValidPassword() {
-
         assertEquals(LOGIN, openHomePage()
                 .openLoginPage(buttonChoice)
                 .openRegisterPage()
