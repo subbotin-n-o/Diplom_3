@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static ru.yandex.practicum.diplom3.web.BrowserType.GOOGLE_CHROME;
 
-public class OtherTest extends BaseTest {
+public class ButtonTransitionTest extends BaseTest {
 
     private static final String LK_BUTTON = "lkButton";
     private static final String SIGN_IN_BUTTON = "signInButton";
@@ -64,6 +64,36 @@ public class OtherTest extends BaseTest {
                 .openProfilePage()
                 .logOut()
                 .getTextLoginHeader());
+    }
+
+    @Test
+    @DisplayName("Check transition to filling section")
+    public void checkTransitionToFillingSection() {
+            assertTrue(openHomePage()
+                    .clickSaucesButton()
+                    .clickBunsButton()
+                    .clickFillingButton()
+                    .isFillingHeaderVisible());
+    }
+
+    @Test
+    @DisplayName("Check transition to sauces section")
+    public void checkTransitionToSaucesSection() {
+        assertTrue(openHomePage()
+                .clickFillingButton()
+                .clickBunsButton()
+                .clickSaucesButton()
+                .isSaucesHeaderVisible());
+    }
+
+    @Test
+    @DisplayName("Check transition to buns section")
+    public void checkTransitionToBunsSection() {
+        assertTrue(openHomePage()
+                .clickSaucesButton()
+                .clickFillingButton()
+                .clickBunsButton()
+                .isBunsHeaderVisible());
     }
 
     private AuthorizedUserHomePage registrationAndAuthorizationUser(GenerateUser user) {
