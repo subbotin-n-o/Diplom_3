@@ -3,8 +3,10 @@ package ru.yandex.practicum.diplom3.web;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.junit.runners.Parameterized;
 
 import java.io.IOException;
@@ -13,11 +15,11 @@ import static org.junit.Assert.assertEquals;
 import static ru.yandex.practicum.diplom3.web.BrowserType.GOOGLE_CHROME;
 import static ru.yandex.practicum.diplom3.web.BrowserType.YANDEX_BROWSER;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(Parameterized.class)
 public class RegisterTest extends BaseTest {
 
     private final String buttonChoice;
-    private final BrowserType browserType;
 
     private static final String LK_BUTTON = "lkButton";
     private static final String SIGN_IN_BUTTON = "signInButton";
@@ -48,7 +50,7 @@ public class RegisterTest extends BaseTest {
 
     @Test
     @DisplayName("Check user registration with valid data")
-    public void checkRegisterValidPassword() {
+    public void a_checkRegisterValidPassword() {
         assertEquals(LOGIN, openHomePage()
                 .openLoginPage(buttonChoice)
                 .openRegisterPage()
@@ -58,7 +60,7 @@ public class RegisterTest extends BaseTest {
 
     @Test
     @DisplayName("Check user registration with invalid password")
-    public void checkRegisterNotValidPassword() {
+    public void b_checkRegisterNotValidPassword() {
         assertEquals(INCORRECT_PASSWORD, openHomePage()
                 .openLoginPage(buttonChoice)
                 .openRegisterPage()

@@ -6,7 +6,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
+import org.junit.runners.Parameterized;
 import ru.yandex.practicum.diplom3.helpers.GenerateUser;
 import ru.yandex.practicum.diplom3.pages.HomePage;
 
@@ -14,16 +16,30 @@ import java.io.IOException;
 
 import static org.junit.Assert.assertTrue;
 import static ru.yandex.practicum.diplom3.web.BrowserType.GOOGLE_CHROME;
+import static ru.yandex.practicum.diplom3.web.BrowserType.YANDEX_BROWSER;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@RunWith(Parameterized.class)
 public class LoginTest extends BaseTest {
 
     private static final String LK_BUTTON = "lkButton";
     private static final String SIGN_IN_BUTTON = "signInButton";
 
+    public LoginTest(BrowserType browserType) {
+        this.browserType = browserType;
+    }
+
+    @Parameterized.Parameters
+    public static Object[][] getData() {
+        return new Object[][]{
+                {GOOGLE_CHROME},
+                {YANDEX_BROWSER}
+        };
+    }
+
     @Before
     public void setUP() throws IOException {
-        initBrowser(GOOGLE_CHROME);
+        initBrowser(browserType);
         createUser();
     }
 

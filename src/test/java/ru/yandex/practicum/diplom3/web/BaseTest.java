@@ -7,7 +7,6 @@ import ru.yandex.practicum.diplom3.pages.HomePage;
 
 import java.io.IOException;
 
-import static com.codeborne.selenide.Selenide.forward;
 import static com.codeborne.selenide.Selenide.open;
 import static ru.yandex.practicum.diplom3.web.BrowserType.GOOGLE_CHROME;
 import static ru.yandex.practicum.diplom3.web.BrowserType.YANDEX_BROWSER;
@@ -15,6 +14,7 @@ import static ru.yandex.practicum.diplom3.web.BrowserType.YANDEX_BROWSER;
 public class BaseTest {
     final String BASE_URL = "https://stellarburgers.nomoreparties.site/";
 
+    protected BrowserType browserType;
     protected GenerateUser user;
 
     private static final String CHROME = "chrome";
