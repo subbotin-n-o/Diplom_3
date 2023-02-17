@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.junit.runners.Parameterized;
-import ru.yandex.practicum.diplom3.helpers.GenerateUser;
+import ru.yandex.practicum.diplom3.helpers.UserGenerator;
 import ru.yandex.practicum.diplom3.pages.AuthorizedUserHomePage;
 
 import java.io.IOException;
@@ -114,7 +114,7 @@ public class ButtonTransitionTest extends BaseTest {
                     .isFillingHeaderVisible());
     }
 
-    private AuthorizedUserHomePage registrationAndAuthorizationUser(GenerateUser user) {
+    private AuthorizedUserHomePage registrationAndAuthorizationUser(UserGenerator user) {
         return openHomePage()
                 .openLoginPage(SIGN_IN_BUTTON)
                 .openRegisterPage()

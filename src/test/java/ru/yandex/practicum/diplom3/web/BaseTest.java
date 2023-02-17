@@ -2,20 +2,24 @@ package ru.yandex.practicum.diplom3.web;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
-import ru.yandex.practicum.diplom3.helpers.GenerateUser;
+import ru.yandex.practicum.diplom3.api.UserCredentials;
+import ru.yandex.practicum.diplom3.helpers.UserGenerator;
 import ru.yandex.practicum.diplom3.pages.HomePage;
 
 import java.io.IOException;
 
 import static com.codeborne.selenide.Selenide.open;
+import static ru.yandex.practicum.diplom3.api.UserClient.deleteUser;
+import static ru.yandex.practicum.diplom3.api.UserClient.loginUser;
 import static ru.yandex.practicum.diplom3.web.BrowserType.GOOGLE_CHROME;
 import static ru.yandex.practicum.diplom3.web.BrowserType.YANDEX_BROWSER;
 
 public class BaseTest {
-    final String BASE_URL = "https://stellarburgers.nomoreparties.site/";
+    final String BASE_URL = System.getProperty("site.url");
 
     protected BrowserType browserType;
-    protected GenerateUser user;
+    protected UserGenerator user;
+    protected String accessToken;
 
     private static final String CHROME = "chrome";
     private static final String YA_BINARY = "/Applications/Yandex.app/Contents/MacOS/Yandex";
@@ -44,11 +48,18 @@ public class BaseTest {
     }
 
     protected void createUser() {
-        user = new GenerateUser();
+        user = new UserGenerator();
     }
 
     protected void browserClose() {
         Selenide.clearBrowserCookies();
         Selenide.closeWebDriver();
+    }
+
+    protected void loginAndDeleteUser() {
+        deleteUser(new StringBuilder(loginUser(UserCredentials.from(user))
+                .extract()
+                .path("accessToken"))
+                .substring(7));
     }
 }

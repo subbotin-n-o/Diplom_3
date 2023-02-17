@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.junit.runners.Parameterized;
-import ru.yandex.practicum.diplom3.helpers.GenerateUser;
+import ru.yandex.practicum.diplom3.helpers.UserGenerator;
 import ru.yandex.practicum.diplom3.pages.HomePage;
 
 import java.io.IOException;
@@ -87,7 +87,7 @@ public class LoginTest extends BaseTest {
                 .isAuthorizedUserHomePage());
     }
 
-    private HomePage registrationUser(GenerateUser user) {
+    private HomePage registrationUser(UserGenerator user) {
         return openHomePage()
                 .openLoginPage(SIGN_IN_BUTTON)
                 .openRegisterPage()

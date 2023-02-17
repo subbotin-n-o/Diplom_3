@@ -4,20 +4,24 @@ import com.github.javafaker.Faker;
 
 import java.util.Locale;
 
-public class GenerateUser {
+public class UserGenerator {
 
     private final String name;
     private final String email;
-    private final String validPassword;
+    private final String password;
     private final String notValidPassword;
 
-    public GenerateUser() {
+    public UserGenerator() {
         Faker faker = new Faker(new Locale("en"));
 
         name = faker.name().firstName();
         email = faker.internet().emailAddress();
-        validPassword = faker.internet().password(6, 10);
+        password = faker.internet().password(6, 10);
         notValidPassword = faker.internet().password(4,5);
+    }
+
+    public UserGenerator getUserCredential() {
+        return new UserGenerator(null, getEmail(), getPassword(), null);
     }
 
     public String getName() {
@@ -28,8 +32,8 @@ public class GenerateUser {
         return email;
     }
 
-    public String getValidPassword() {
-        return validPassword;
+    public String getPassword() {
+        return password;
     }
 
     public String getNotValidPassword() {

@@ -1,10 +1,9 @@
 package ru.yandex.practicum.diplom3.pages;
 
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import ru.yandex.practicum.diplom3.helpers.GenerateUser;
+import ru.yandex.practicum.diplom3.helpers.UserGenerator;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
@@ -36,9 +35,9 @@ public class LoginPage extends AbstractPage {
     @FindBy(how = How.XPATH, using = RESTORE_PASSWORD_BTN)
     private SelenideElement restorePasswordButton;
 
-    public AuthorizedUserHomePage signIn(GenerateUser user) {
+    public AuthorizedUserHomePage signIn(UserGenerator user) {
         setFieldEmail(user.getEmail());
-        setFieldPassword(user.getValidPassword());
+        setFieldPassword(user.getPassword());
 
         authorizedUserHomePage = page(AuthorizedUserHomePage.class);
         authorizedUserHomePage.waitPage();
