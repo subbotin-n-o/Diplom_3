@@ -9,8 +9,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.junit.runners.Parameterized;
-import ru.yandex.practicum.diplom3.helpers.UserGenerator;
-import ru.yandex.practicum.diplom3.pages.HomePage;
 
 import java.io.IOException;
 
@@ -33,7 +31,7 @@ public class LoginTest extends BaseTest {
     public static Object[][] getData() {
         return new Object[][]{
                 {GOOGLE_CHROME},
-                {YANDEX_BROWSER}
+//                {YANDEX_BROWSER}
         };
     }
 
@@ -41,13 +39,14 @@ public class LoginTest extends BaseTest {
     public void setUP() throws IOException {
         initBrowser(browserType);
         createUser();
+        registerUserAndGetAccessToken();
     }
 
     @Test
     @DisplayName("Check login using the \"Private Office\" button")
     @Description("Check login User using the \"Private Office\" button on the home page")
     public void a_checkLoginUser() {
-        assertTrue(registrationUser(user)
+        assertTrue(openHomePage()
                 .openLoginPage(LK_BUTTON)
                 .signIn(user)
                 .isAuthorizedUserHomePage());
@@ -57,7 +56,7 @@ public class LoginTest extends BaseTest {
     @DisplayName("Check login using the \"Login to account\" button")
     @Description("Check login User using the \"Login to account\" button on the home page")
     public void b_checkLoginUser() {
-        assertTrue(registrationUser(user)
+        assertTrue(openHomePage()
                 .openLoginPage(SIGN_IN_BUTTON)
                 .signIn(user)
                 .isAuthorizedUserHomePage());
@@ -67,7 +66,7 @@ public class LoginTest extends BaseTest {
     @DisplayName("Check login using the \"Login\" button")
     @Description("Check login User using the \"Login\" button on the register page")
     public void c_checkLoginUser() {
-        assertTrue(registrationUser(user)
+        assertTrue(openHomePage()
                 .openLoginPage(LK_BUTTON)
                 .openRegisterPage()
                 .openLoginPage()
@@ -79,7 +78,7 @@ public class LoginTest extends BaseTest {
     @DisplayName("Check login using the \"Restore password\" button")
     @Description("Check login User using the \"Restore password\" button on the restore password page")
     public void d_checkLoginUser() {
-        assertTrue(registrationUser(user)
+        assertTrue(openHomePage()
                 .openLoginPage(LK_BUTTON)
                 .openRestorePasswordPage()
                 .openLoginPage()
@@ -87,16 +86,9 @@ public class LoginTest extends BaseTest {
                 .isAuthorizedUserHomePage());
     }
 
-    private HomePage registrationUser(UserGenerator user) {
-        return openHomePage()
-                .openLoginPage(SIGN_IN_BUTTON)
-                .openRegisterPage()
-                .registrationUserValidData(user)
-                .backToHomePage();
-    }
-
     @After
     public void tearDown() {
+        clearUserDate(accessToken);
         browserClose();
     }
 

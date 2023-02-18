@@ -3,7 +3,8 @@ package ru.yandex.practicum.diplom3.pages;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import ru.yandex.practicum.diplom3.helpers.UserGenerator;
+import ru.yandex.practicum.diplom3.api.User;
+import ru.yandex.practicum.diplom3.helpers.UserDataGenerator;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.page;
@@ -39,7 +40,7 @@ public class RegisterPage extends AbstractPage {
     @FindBy(how = How.CSS, using = ERROR_MESSAGE)
     private SelenideElement errorMessage;
 
-    public LoginPage registrationUserValidData(UserGenerator user) {
+    public LoginPage registrationUserValidData(User user) {
         setFieldName(user.getName());
         setFieldEmail(user.getEmail());
         setFieldPassword(user.getPassword());
@@ -51,7 +52,7 @@ public class RegisterPage extends AbstractPage {
         return loginPage;
     }
 
-    public RegisterPage registrationUserNotValidData(UserGenerator user) {
+    public RegisterPage registrationUserNotValidData(User user) {
         setFieldName(user.getName());
         setFieldEmail(user.getEmail());
         setFieldPassword(user.getNotValidPassword());

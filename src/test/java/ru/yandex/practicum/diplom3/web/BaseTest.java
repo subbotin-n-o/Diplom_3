@@ -1,29 +1,31 @@
 package ru.yandex.practicum.diplom3.web;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
+import ru.yandex.practicum.diplom3.api.Api;
+import ru.yandex.practicum.diplom3.api.User;
 import ru.yandex.practicum.diplom3.api.UserCredentials;
-import ru.yandex.practicum.diplom3.helpers.UserGenerator;
 import ru.yandex.practicum.diplom3.pages.HomePage;
 
 import java.io.IOException;
 
-import static com.codeborne.selenide.Selenide.open;
-import static ru.yandex.practicum.diplom3.api.UserClient.deleteUser;
-import static ru.yandex.practicum.diplom3.api.UserClient.loginUser;
+import static com.codeborne.selenide.Selenide.*;
+import static ru.yandex.practicum.diplom3.api.Api.deleteUser;
+import static ru.yandex.practicum.diplom3.api.Api.loginUser;
+import static ru.yandex.practicum.diplom3.helpers.UserDataGenerator.getUser;
 import static ru.yandex.practicum.diplom3.web.BrowserType.GOOGLE_CHROME;
 import static ru.yandex.practicum.diplom3.web.BrowserType.YANDEX_BROWSER;
 
 public class BaseTest {
-    final String BASE_URL = System.getProperty("site.url");
+    final String BASE_URL = "https://stellarburgers.nomoreparties.site/";
 
     protected BrowserType browserType;
-    protected UserGenerator user;
-    protected String accessToken;
+    protected static User user;
 
     private static final String CHROME = "chrome";
     private static final String YA_BINARY = "/Applications/Yandex.app/Contents/MacOS/Yandex";
     private static final String FULL_HD_SIZE = "1920x1080";
+
+    protected static String accessToken;
 
     protected HomePage openHomePage() {
         return open(BASE_URL, HomePage.class);
@@ -48,18 +50,29 @@ public class BaseTest {
     }
 
     protected void createUser() {
-        user = new UserGenerator();
+        user = getUser();
     }
 
     protected void browserClose() {
-        Selenide.clearBrowserCookies();
-        Selenide.closeWebDriver();
+        clearBrowserCookies();
+        closeWebDriver();
     }
 
-    protected void loginAndDeleteUser() {
-        deleteUser(new StringBuilder(loginUser(UserCredentials.from(user))
+    protected void loginUserAndGetAccessToken() {
+        accessToken = new StringBuilder(loginUser(UserCredentials.from(user))
                 .extract()
                 .path("accessToken"))
-                .substring(7));
+                .substring(7);
+    }
+
+    protected void registerUserAndGetAccessToken() {
+        accessToken = new StringBuilder(Api.registerUser(user)
+                .extract()
+                .path("accessToken"))
+                .substring(7);
+    }
+
+    protected static void clearUserDate(String token) {
+        deleteUser(token);
     }
 }
