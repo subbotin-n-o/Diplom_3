@@ -31,7 +31,7 @@ public class LoginTest extends BaseTest {
     public static Object[][] getData() {
         return new Object[][]{
                 {GOOGLE_CHROME},
-//                {YANDEX_BROWSER}
+                {YANDEX_BROWSER}
         };
     }
 
@@ -45,7 +45,7 @@ public class LoginTest extends BaseTest {
     @Test
     @DisplayName("Check login using the \"Private Office\" button")
     @Description("Check login User using the \"Private Office\" button on the home page")
-    public void a_checkLoginUser() {
+    public void a_loginUserTest() {
         assertTrue(openHomePage()
                 .openLoginPage(LK_BUTTON)
                 .signIn(user)
@@ -55,7 +55,7 @@ public class LoginTest extends BaseTest {
     @Test
     @DisplayName("Check login using the \"Login to account\" button")
     @Description("Check login User using the \"Login to account\" button on the home page")
-    public void b_checkLoginUser() {
+    public void b_loginUserTest() {
         assertTrue(openHomePage()
                 .openLoginPage(SIGN_IN_BUTTON)
                 .signIn(user)
@@ -65,7 +65,7 @@ public class LoginTest extends BaseTest {
     @Test
     @DisplayName("Check login using the \"Login\" button")
     @Description("Check login User using the \"Login\" button on the register page")
-    public void c_checkLoginUser() {
+    public void c_loginUserTest() {
         assertTrue(openHomePage()
                 .openLoginPage(LK_BUTTON)
                 .openRegisterPage()
@@ -77,7 +77,7 @@ public class LoginTest extends BaseTest {
     @Test
     @DisplayName("Check login using the \"Restore password\" button")
     @Description("Check login User using the \"Restore password\" button on the restore password page")
-    public void d_checkLoginUser() {
+    public void d_loginUserTest() {
         assertTrue(openHomePage()
                 .openLoginPage(LK_BUTTON)
                 .openRestorePasswordPage()

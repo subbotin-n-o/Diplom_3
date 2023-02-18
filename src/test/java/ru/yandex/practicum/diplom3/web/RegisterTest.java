@@ -1,6 +1,5 @@
 package ru.yandex.practicum.diplom3.web;
 
-import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
@@ -37,9 +36,9 @@ public class RegisterTest extends BaseTest {
     public static Object[][] getData() {
         return new Object[][]{
                 {LK_BUTTON, GOOGLE_CHROME},
-//                {SIGN_IN_BUTTON, GOOGLE_CHROME},
-//                {LK_BUTTON, YANDEX_BROWSER},
-//                {SIGN_IN_BUTTON, YANDEX_BROWSER}
+                {SIGN_IN_BUTTON, GOOGLE_CHROME},
+                {LK_BUTTON, YANDEX_BROWSER},
+                {SIGN_IN_BUTTON, YANDEX_BROWSER}
         };
     }
 
@@ -51,7 +50,7 @@ public class RegisterTest extends BaseTest {
 
     @Test
     @DisplayName("Check user registration with valid data")
-    public void a_checkRegisterValidPassword() {
+    public void a_registerValidPasswordTest() {
         assertEquals(LOGIN, openHomePage()
                 .openLoginPage(buttonChoice)
                 .openRegisterPage()
@@ -63,7 +62,7 @@ public class RegisterTest extends BaseTest {
 
     @Test
     @DisplayName("Check user registration with invalid password")
-    public void b_checkRegisterNotValidPassword() {
+    public void b_registerNotValidPasswordTest() {
         assertEquals(INCORRECT_PASSWORD, openHomePage()
                 .openLoginPage(buttonChoice)
                 .openRegisterPage()

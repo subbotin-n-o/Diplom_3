@@ -9,8 +9,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.junit.runners.Parameterized;
-import ru.yandex.practicum.diplom3.api.User;
-import ru.yandex.practicum.diplom3.pages.AuthorizedUserHomePage;
 
 import java.io.IOException;
 
@@ -128,14 +126,6 @@ public class ButtonTransitionTest extends BaseTest {
                     .clickBunsButton()
                     .clickFillingButton()
                     .isFillingHeaderVisible());
-    }
-
-    private AuthorizedUserHomePage registrationAndAuthorizationUser(User user) {
-        return openHomePage()
-                .openLoginPage(SIGN_IN_BUTTON)
-                .openRegisterPage()
-                .registrationUserValidData(user)
-                .signIn(user);
     }
 
     @After

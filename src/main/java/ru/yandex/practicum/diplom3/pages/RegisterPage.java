@@ -4,7 +4,6 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import ru.yandex.practicum.diplom3.api.User;
-import ru.yandex.practicum.diplom3.helpers.UserDataGenerator;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.page;

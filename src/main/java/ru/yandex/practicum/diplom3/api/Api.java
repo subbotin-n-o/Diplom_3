@@ -9,7 +9,6 @@ import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
 
 import static io.restassured.RestAssured.given;
-import static org.apache.hc.core5.http.HttpStatus.SC_ACCEPTED;
 
 public class Api {
 
