@@ -22,7 +22,7 @@ public class ProfilePage extends AbstractPage {
         return profilePageText.getText().equals("В этом разделе вы можете изменить свои персональные данные");
     }
 
-    public AuthorizedUserHomePage TransitionByClickConstructorButton() {
+    public AuthorizedUserHomePage transitionByClickConstructorButton() {
         clickConstructorButton();
 
         authorizedUserHomePage = page(AuthorizedUserHomePage.class);
@@ -31,7 +31,7 @@ public class ProfilePage extends AbstractPage {
         return authorizedUserHomePage;
     }
 
-    public AuthorizedUserHomePage TransitionByClickLogoBurgers() {
+    public AuthorizedUserHomePage transitionByClickLogoBurgers() {
         clickLogoBurgers();
 
         authorizedUserHomePage = page(AuthorizedUserHomePage.class);

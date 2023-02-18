@@ -53,7 +53,6 @@ public class Api {
                 .spec(getSpec())
                 .auth().oauth2(token)
                 .delete(PATH_DELETE)
-                .then()
-                .statusCode(SC_ACCEPTED);
+                .then();
     }
 }

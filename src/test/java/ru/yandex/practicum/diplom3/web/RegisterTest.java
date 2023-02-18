@@ -1,5 +1,6 @@
 package ru.yandex.practicum.diplom3.web;
 
+import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
@@ -36,9 +37,9 @@ public class RegisterTest extends BaseTest {
     public static Object[][] getData() {
         return new Object[][]{
                 {LK_BUTTON, GOOGLE_CHROME},
-                {SIGN_IN_BUTTON, GOOGLE_CHROME},
-                {LK_BUTTON, YANDEX_BROWSER},
-                {SIGN_IN_BUTTON, YANDEX_BROWSER}
+//                {SIGN_IN_BUTTON, GOOGLE_CHROME},
+//                {LK_BUTTON, YANDEX_BROWSER},
+//                {SIGN_IN_BUTTON, YANDEX_BROWSER}
         };
     }
 

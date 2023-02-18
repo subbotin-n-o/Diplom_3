@@ -10,7 +10,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.junit.runners.Parameterized;
 import ru.yandex.practicum.diplom3.api.User;
-import ru.yandex.practicum.diplom3.helpers.UserDataGenerator;
 import ru.yandex.practicum.diplom3.pages.AuthorizedUserHomePage;
 
 import java.io.IOException;
@@ -49,8 +48,12 @@ public class ButtonTransitionTest extends BaseTest {
     @Test
     @DisplayName("Check transition by clicking on the \"Personal Account\"")
     @Description("Checking the transition by the \"Personal Account\" button from the Home page")
-    public void a_checkTransitionClickLkButton() {
-        assertTrue(registrationAndAuthorizationUser(user)
+    public void a_transitionClickLkButtonTest() {
+        registerUserAndGetAccessToken();
+
+        assertTrue(openHomePage()
+                .openLoginPage(SIGN_IN_BUTTON)
+                .signIn(user)
                 .openProfilePage()
                 .isProfilePage());
     }
@@ -58,28 +61,40 @@ public class ButtonTransitionTest extends BaseTest {
     @Test
     @DisplayName("Check the transition by clicking on the \"Constructor\"")
     @Description("Checking the transition by the \"Constructor\" button from the Personal Account page")
-    public void b_checkTransitionByClickConstructorButton() {
-        assertTrue(registrationAndAuthorizationUser(user)
+    public void b_transitionByClickConstructorButtonTest() {
+        registerUserAndGetAccessToken();
+
+        assertTrue(openHomePage()
+                .openLoginPage(SIGN_IN_BUTTON)
+                .signIn(user)
                 .openProfilePage()
-                .TransitionByClickConstructorButton()
+                .transitionByClickConstructorButton()
                 .isAuthorizedUserHomePage());
     }
 
     @Test
     @DisplayName("Check the transition by clicking on the \"Logo\"")
     @Description("Checking the transition by the \"Stellar Burgers\" button from the Personal Account page")
-    public void c_checkTransitionByClickLogoBurgers() {
-        assertTrue(registrationAndAuthorizationUser(user)
+    public void c_transitionByClickLogoBurgersTest() {
+        registerUserAndGetAccessToken();
+
+        assertTrue(openHomePage()
+                .openLoginPage(SIGN_IN_BUTTON)
+                .signIn(user)
                 .openProfilePage()
-                .TransitionByClickLogoBurgers()
+                .transitionByClickLogoBurgers()
                 .isAuthorizedUserHomePage());
     }
 
     @Test
     @DisplayName("Check Logout")
     @Description("Checking out of your account")
-    public void d_checkLogout() {
-        assertEquals(LOGIN, registrationAndAuthorizationUser(user)
+    public void d_logoutTest() {
+        registerUserAndGetAccessToken();
+
+        assertEquals(LOGIN, openHomePage()
+                .openLoginPage(SIGN_IN_BUTTON)
+                .signIn(user)
                 .openProfilePage()
                 .logOut()
                 .getTextLoginHeader());
@@ -87,7 +102,7 @@ public class ButtonTransitionTest extends BaseTest {
 
     @Test
     @DisplayName("Check transition to buns section")
-    public void e_checkTransitionToBunsSection() {
+    public void e_transitionToBunsSectionTest() {
         assertTrue(openHomePage()
                 .clickSaucesButton()
                 .clickFillingButton()
@@ -97,7 +112,7 @@ public class ButtonTransitionTest extends BaseTest {
 
     @Test
     @DisplayName("Check transition to sauces section")
-    public void f_checkTransitionToSaucesSection() {
+    public void f_transitionToSaucesSectionTest() {
         assertTrue(openHomePage()
                 .clickFillingButton()
                 .clickBunsButton()
@@ -107,7 +122,7 @@ public class ButtonTransitionTest extends BaseTest {
 
     @Test
     @DisplayName("Check transition to filling section")
-    public void g_checkTransitionToFillingSection() {
+    public void g_transitionToFillingSectionTest() {
             assertTrue(openHomePage()
                     .clickSaucesButton()
                     .clickBunsButton()
@@ -125,6 +140,9 @@ public class ButtonTransitionTest extends BaseTest {
 
     @After
     public void tearDown() {
+        if(accessToken != null) {
+            clearUserDate(accessToken);
+        }
         browserClose();
     }
 }
